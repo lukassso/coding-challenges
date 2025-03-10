@@ -1,4 +1,11 @@
-// define a class
+// Data Structure: Hash Map
+// Algorithm: Sliding Window (Time-Based Filtering)
+// Concept:
+// - we maintain a sliding window of 10 seconds to track messages
+// - If a message appears within the 10 sec window, we reject it (false)
+// - If a message is outside the window, we log it (true) and update the timestamp
+
+// we define a class
 class Logger {
   // declare a property which is a Map object
   private messageMap: Map<string, number>;
