@@ -9,13 +9,12 @@ class Logger {
   }
   // define a method which takes two parameters: timestamp (a number), message (a string). The method returns a boolean value
   shouldPrintMessage(timestamp: number, message: string): boolean {
+    // define variable and initialize it to the value retrieved from messageMap
+    const lastTimeStamp = this.messageMap.get(message);
     // use an 'if' statement to check whether either of these conditions is met:
     // The 'messageMap' does not contain a 'message'.
-    // The 'timestamp' is greter or equal to at least 10 seconds have passed since the last log
-    if (
-      !this.messageMap.has(message) ||
-      timestamp >= this.messageMap.get(message)! + 10
-    ) {
+    // The 'timestamp' is greater or equal to at least 10 seconds have passed since the last log
+    if (!lastTimeStamp || timestamp >= lastTimeStamp + 10) {
       // if the condition is true we:
       // update 'messageMap' by setting 'message' as a key and 'timestamp' as a value
       // return 'true', allowing the message to be logged
