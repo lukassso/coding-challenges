@@ -28,4 +28,33 @@ The in-place rotation method without additional memory consists of two steps:
 
 Step 4: Implementation
 */
+// We define the function to rotate the matrix which is a square two-dimensional array (n x n). The function returns void, meaning it modifies the matrix in-place without returning new one.
+function rotate(matrix: number[][]): void {
+  // We difine a variable 'n' and initialize it as 'matrix.length', representing the matrix size
+  const n = matrix.length;
+  // Implementation of Matrix transposition
+  // We iterate through each row index (row) in 'n', stopping when 'row<n'
+  for (let row = 0; row < n; row++) {
+    //Inside the loop we define another looop that iterates through each column index (col), starting from 'row + 1' to avoid redundant swaps
+    for (let col = row + 1; col < n; col++) {
+      // For each iteration we swap values efectively transposing the matrix by switching rows and columns
+      [matrix[row][col], matrix[col][row]] = [
+        matrix[col][row],
+        matrix[row][col],
+      ];
+    }
+  }
 
+  // Mirror implementation (Swapping columns in place)
+  // We define a 'for' loop that iterates 'row' indexes from 0 to 'n-1', covering all rows
+  for (let row = 0; row < n; row++) {
+    // Inside the loop we define second loop that iterates through column indexes from 0 to Math.floor(n / 2) processing only half or the row(rounded down)
+    for (let col = 0; col < Math.floor(n / 2); col++) {
+      // Inside the loop we swap the elements effecively reversing the order of columns in the current row. The purpose of this operation is to mirror the matrix along its vertical axis, completing the 90 degree rotation
+      [matrix[row][col], matrix[row][n - col - 1]] = [
+        matrix[row][n - col - 1],
+        matrix[row][col],
+      ];
+    }
+  }
+}
