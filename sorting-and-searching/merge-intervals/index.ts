@@ -15,3 +15,30 @@ Step 2: Algorithm Chosen – Sorting + Greedy Approach
 
 Step 3: Implementation
 */
+// We define the function that takes `intervals` as a parameter, which is a two-dimensional array of numbers.
+// The function returns a two-dimensional array of numbers representing the merged intervals.
+function merge(intervals: number[][]): number[][] {
+  // Sort intervals based on start time
+  intervals.sort((a, b) => a[0] - b[0]);
+
+  // We define a variable which is a two-dimensional array, and initialize it as an empty array.
+  const merged: number[][] = [];
+
+  // We define a `for` loop to iterate through each index of `intervals`
+  for (const interval of intervals) {
+    // We use an `if` statement to check if `merged.length` is empty or if the last interval in `merged` does not overlap with interval
+    if (!merged.length || merged[merged.length - 1][1] < interval[0]) {
+      // If true, we add `interval` to `merged` using the push method.
+      merged.push(interval);
+    } else {
+      // Otherwise, we merge the overlapping intervals by updating the `end` value of the last interval in `merged`
+      merged[merged.length - 1][1] = Math.max(
+        merged[merged.length - 1][1],
+        interval[1]
+      );
+    }
+  }
+
+  // Return merged intervals
+  return merged;
+}
