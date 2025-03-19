@@ -21,3 +21,32 @@ Step 2: Code Implementation
 
 Step 3: Implementation
 */
+
+function insert(intervals: number[][], newInterval: number[]): number[][] {
+  const merged: number[][] = [];
+  let i = 0;
+
+  // Step 1: Add all intervals before newInterval
+  while (i < intervals.length && intervals[i][1] < newInterval[0]) {
+      merged.push(intervals[i]);
+      i++;
+  }
+
+  // Step 2: Merge overlapping intervals
+  while (i < intervals.length && intervals[i][0] <= newInterval[1]) {
+      newInterval[0] = Math.min(newInterval[0], intervals[i][0]);
+      newInterval[1] = Math.max(newInterval[1], intervals[i][1]);
+      i++;
+  }
+  merged.push(newInterval);
+
+  // Step 3: Add all remaining intervals
+  while (i < intervals.length) {
+      merged.push(intervals[i]);
+      i++;
+  }
+
+  // Step 4: Return the merged list
+  return merged;
+}
+
