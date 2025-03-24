@@ -53,7 +53,7 @@ function multiply(num1: string, num2: string): string {
   }
 
   // We define a while loop that runs as long as the length of 'res' is greater than 1 and the last digit is 0
-  while (res.length > 1 && res.at(-1) === 0) {
+  while (res.length > 1 && res[res.length - 1] === 0) {
     // If the condition is met, we remove the last element from the array
     res.pop();
   }
